@@ -109,28 +109,96 @@ window.PORTFOLIO = {
     },
     {
       id: "medcare",
-      title: "MedCare",
-      subtitle: "Final year project — digital healthcare platform",
+      title: "AL MedCare",
+      subtitle: "Seamless medicine and consultation system (final year project)",
       kind: "Final year project",
+      period: "Feb 2025 – Dec 2025",
       featured: false,
       cover: "care",
       summary:
-        "A healthcare platform covering doctor consultations, AI-assisted prescription verification, medicine ordering and delivery tracking.",
+        "An academic healthcare platform for appointment scheduling, doctor consultations and patient record access, with separate patient and doctor modules, AI-assisted prescription verification, medicine ordering and delivery tracking.",
       problem:
-        "Getting from a consultation to medicine at the door usually means several separate services, with no check that a prescription has been read correctly.",
+        "Getting from a consultation to medicine at the door usually means several separate services, with no check that a prescription has been read correctly, and booking appointments is often slow.",
       solution:
-        "One platform that links the consultation, a prescription check, the medicine order and its delivery status.",
+        "One platform that links appointment booking, the consultation, a prescription check, the medicine order and its delivery status, with dedicated patient and doctor modules.",
       features: [
+        "Appointment scheduling and booking workflows",
+        "Separate patient and doctor modules",
+        "Patient record access",
         "Doctor consultations",
         "AI-assisted prescription verification",
-        "Medicine ordering",
-        "Delivery tracking",
+        "Medicine ordering and delivery tracking",
+        "Responsive, accessible interfaces",
       ],
-      tech: [],
+      tech: ["HTML", "CSS", "JavaScript", "React Native"],
       contribution:
-        "Developed as the final year project for the BS Software Engineering degree at UMT.",
+        "Developed as the final year project for the BS Software Engineering degree at UMT: patient and doctor modules, booking workflows and responsive, accessible interfaces.",
       implementation: [
-        "Connecting four stages — consult, verify, order, deliver — into one user journey",
+        "Connecting the stages (book, consult, verify, order, deliver) into one user journey",
+        "Structured record organisation so patients and doctors see the right information",
+      ],
+      repo: null,
+      demo: null,
+      image: null,
+      screenshots: [],
+    },
+    {
+      id: "adminpro",
+      title: "AdminPro",
+      subtitle: "Product management dashboard",
+      kind: "Frontend app",
+      period: "Mar 2026 – Apr 2026",
+      featured: false,
+      cover: "crud",
+      summary:
+        "A single-page administrative dashboard for managing product inventories and catalogue records, with full CRUD, advanced search and filtering.",
+      problem:
+        "Teams managing a product catalogue need a quick way to add, update and find products without digging through spreadsheets.",
+      solution:
+        "A responsive single-page dashboard with create, read, update and delete operations and fast search and filters over the catalogue.",
+      features: [
+        "Complete CRUD for products",
+        "Advanced search and filtering",
+        "Inventory and catalogue records",
+        "Responsive interface design",
+      ],
+      tech: ["React", "JavaScript", "Bootstrap", "HTML", "CSS"],
+      contribution: "Built the dashboard: CRUD flows, search and filtering, and the responsive interface.",
+      implementation: [
+        "Search and filters that work together over the same product list",
+        "Streamlined front-end architecture for a fast single-page experience",
+      ],
+      repo: null,
+      demo: null,
+      image: null,
+      screenshots: [],
+    },
+    {
+      id: "sveston",
+      title: "Sveston Watches",
+      subtitle: "E-commerce frontend store",
+      kind: "Frontend app",
+      period: "Jan 2026 – Feb 2026",
+      featured: false,
+      cover: "store",
+      summary:
+        "A responsive e-commerce storefront for a watch brand with product listings, category navigation, shopping cart, wishlist and checkout interface.",
+      problem:
+        "Shoppers need to browse a catalogue comfortably on any device and move from browsing to checkout without friction.",
+      solution:
+        "A mobile-friendly storefront with clear category navigation, a cart and wishlist, and checkout interface components focused on usability and accessibility.",
+      features: [
+        "Product listings and category navigation",
+        "Shopping cart functionality",
+        "Wishlist management",
+        "Checkout interface components",
+        "Mobile-friendly, accessible layouts",
+      ],
+      tech: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+      contribution: "Built the storefront front end: listings, navigation, cart, wishlist and checkout screens.",
+      implementation: [
+        "Cart and wishlist state kept in step across pages",
+        "Mobile-first layouts using the Bootstrap grid",
       ],
       repo: null,
       demo: null,
@@ -263,7 +331,7 @@ window.PORTFOLIO = {
   skills: [
     {
       group: "Frontend",
-      items: ["HTML5", "CSS3", "JavaScript", "React.js", "Next.js", "Redux Toolkit", "Tailwind CSS", "Bootstrap", "Responsive design"],
+      items: ["HTML5", "CSS3", "JavaScript (ES6)", "React.js", "Next.js", "Redux Toolkit", "Tailwind CSS", "Bootstrap", "Responsive design"],
     },
     {
       group: "Backend",
@@ -275,7 +343,11 @@ window.PORTFOLIO = {
     },
     {
       group: "Tools",
-      items: ["Git", "GitHub", "GitLab", "VS Code", "Postman", "npm"],
+      items: ["Git", "GitHub", "GitLab", "VS Code", "Postman", "npm", "MS Office"],
+    },
+    {
+      group: "Professional",
+      items: ["Agile & Scrum", "State management", "Cross-browser compatibility", "Debugging & troubleshooting", "Software quality assurance", "Problem solving", "Team collaboration"],
     },
   ],
 };

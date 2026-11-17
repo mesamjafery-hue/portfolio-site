@@ -14,7 +14,6 @@ about.html       About: journey, quick facts, what I do, experience & education,
 projects.html    Selected works (with details panel and Nodaly demo video) and smaller builds
 resume.html      Resume: inline PDF viewer and download
 contact.html     Contact details and message form
-cv.html          Printable CV generated from js/data.js ("Save as PDF")
 css/styles.css   All styles; light/dark colours are CSS variables at the top
 js/data.js       All editable content: profile, projects, small builds, skills
 js/main.js       Rendering, theme toggle, mobile menu, project details, contact form
@@ -38,7 +37,7 @@ Everything recruiters read about projects lives in `js/data.js`.
 - **Add a demo video:** put an MP4 in `assets/video/` and set
   `video: { src, poster, caption }` on the project. A "Watch demo" button appears
   on the card and the player opens in the details panel. (Nodaly already has one.)
-- **Replace the CV:** overwrite `assets/Meesam-Abbas-CV.pdf` with your own PDF
+- **Replace the resume:** overwrite `assets/Meesam-Abbas-CV.pdf` with your new PDF
   (keep the file name, or change `profile.cv` in `data.js`).
 
 ## Contact form

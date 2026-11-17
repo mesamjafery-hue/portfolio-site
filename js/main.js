@@ -75,7 +75,7 @@
   /* ---------- Skills + stack strip ---------- */
   // Technology logos come from Simple Icons (CC0); generic skills use UI icons.
   var ICONS = {
-    "HTML5": "si-html5", "CSS3": "si-css", "JavaScript": "si-javascript", "React.js": "si-react", "React": "si-react",
+    "HTML5": "si-html5", "HTML": "si-html5", "CSS3": "si-css", "CSS": "si-css", "JavaScript": "si-javascript", "JavaScript (ES6)": "si-javascript", "React Native": "si-react", "React.js": "si-react", "React": "si-react",
     "Next.js": "si-nextdotjs", "Redux Toolkit": "si-redux", "Redux": "si-redux", "Tailwind CSS": "si-tailwindcss", "Bootstrap": "si-bootstrap",
     "Node.js": "si-nodedotjs", "Express.js": "si-express", "Express": "si-express", "MongoDB": "si-mongodb",
     "PostgreSQL": "si-postgresql", "Git": "si-git", "GitHub": "si-github", "GitLab": "si-gitlab",
@@ -133,6 +133,16 @@
         '<span class="sc-ent sc-ent-sub">messages</span><span class="sc-ent sc-ent-sub">activity</span>' +
         "</div>";
     },
+    crud: function () {
+      var rows = [["Classic Chrono", "In stock", "on"], ["Field Watch", "Low", "low"], ["Diver 200", "In stock", "on"]];
+      return '<div class="sc sc-crud"><div class="sc-crud-top"><span class="sc-search">Search products</span><span class="sc-btn">+ Add</span></div>' +
+        rows.map(function (r) { return '<div class="sc-row"><b>' + r[0] + '</b><i class="st st-' + r[2] + '">' + r[1] + '</i><span>Edit</span><span>Delete</span></div>'; }).join("") + "</div>";
+    },
+    store: function () {
+      var items = ["", "", "", ""];
+      return '<div class="sc sc-store"><div class="sc-store-top"><span>Men</span><span>Women</span><span>New</span><span class="sc-cart">Cart 2</span></div><div class="sc-store-grid">' +
+        items.map(function () { return '<span class="sc-prod"><i></i><b></b><em></em></span>'; }).join("") + "</div></div>";
+    },
     schema: function () {
       var t = ["users", "roles", "companies", "leads", "deals", "clients", "projects", "tasks", "requirements", "invoices", "tickets", "audit_logs"];
       return '<div class="sc sc-schema">' + t.map(function (x) { return '<span class="sc-table">' + x + "</span>"; }).join("") + "</div>";
@@ -181,7 +191,7 @@
         '<article class="project-card' + (p.featured ? " is-featured" : "") + '" id="project-' + esc(p.id) + '">' +
           coverHTML(p) +
           '<div class="card-body">' +
-            '<p class="kind">' + esc(p.kind) + "</p>" +
+            '<div class="card-meta"><p class="kind">' + esc(p.kind) + "</p>" + (p.period ? '<p class="period">' + esc(p.period) + "</p>" : "") + "</div>" +
             '<h3 class="card-title">' + esc(p.title) + "</h3>" +
             '<p class="card-sub">' + esc(p.subtitle) + "</p>" +
             '<p class="card-summary">' + esc(p.summary) + "</p>" +
@@ -261,7 +271,7 @@
     return (
       '<header class="dlg-head">' +
         (p.video ? videoHTML(p) : coverHTML(p)) +
-        '<p class="kind">' + esc(p.kind) + "</p>" +
+        '<div class="card-meta"><p class="kind">' + esc(p.kind) + "</p>" + (p.period ? '<p class="period">' + esc(p.period) + "</p>" : "") + "</div>" +
         '<h2 id="dlg-title" class="dlg-title">' + esc(p.title) + "</h2>" +
         '<p class="card-sub">' + esc(p.subtitle) + "</p>" +
       "</header>" +
@@ -336,6 +346,25 @@
   }
   openFromHash();
   window.addEventListener("hashchange", openFromHash);
+
+  /* ---------- Certificate viewer ---------- */
+  var certDlg = $("[data-cert-dialog]");
+  if (certDlg) {
+    var certImg = $("[data-cert-dialog-img]", certDlg), certTitle = $("[data-cert-dialog-title]", certDlg), certFrom = null;
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest("[data-cert]");
+      if (!t) return;
+      certFrom = t;
+      certImg.src = t.getAttribute("data-cert");
+      certImg.alt = "Certificate: " + (t.getAttribute("data-cert-title") || "");
+      certTitle.textContent = t.getAttribute("data-cert-title") || "Certificate";
+      if (typeof certDlg.showModal === "function") { certDlg.showModal(); document.body.classList.add("no-scroll"); }
+      else window.open(t.getAttribute("data-cert"), "_blank");
+    });
+    $("[data-cert-close]", certDlg).addEventListener("click", function () { certDlg.close(); });
+    certDlg.addEventListener("click", function (e) { if (e.target === certDlg) certDlg.close(); });
+    certDlg.addEventListener("close", function () { document.body.classList.remove("no-scroll"); if (certFrom) certFrom.focus(); });
+  }
 
   /* ---------- Contact form ----------
      Sends through FormSubmit (https://formsubmit.co), a free form-to-email
@@ -429,7 +458,7 @@
   /* ---------- Scroll reveal (subtle, once) ---------- */
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if ("IntersectionObserver" in window && !reduce) {
-    var targets = $$(".section-head, .section > .section-title, .stack-strip, .capability, .project-card, .small-item, .timeline-item, .edu-card, .skill-group, .about-photo, .about-copy, .contact-copy, .contact-form, .viewer-frame");
+    var targets = $$(".section-head, .section > .section-title, .stack-strip, .capability, .cert-card, .project-card, .small-item, .timeline-item, .edu-card, .skill-group, .about-photo, .about-copy, .contact-copy, .contact-form, .viewer-frame");
     root.classList.add("reveal-ready");
     var ro = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
