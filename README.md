@@ -9,19 +9,21 @@ It deploys to GitHub Pages exactly as it is.
 ## Structure
 
 ```
-index.html              Page markup (hero, about, projects, experience, skills, contact)
-resume.html             Printable CV generated from the same content ("Save as PDF")
-css/styles.css          All styles; theme colours are CSS variables at the top
-js/data.js              ← All editable content: profile, projects, small builds, skills
-js/main.js              Rendering, theme toggle, mobile menu, project details, contact form
-assets/
-  Meesam-Abbas-CV.pdf   File served by every "Download CV" button
-  img/                  Optimised profile photo (WebP + JPEG, 320/640 px)
-  fonts/                Self-hosted Geist variable fonts (SIL Open Font License)
-                        Technology logos are inline SVGs from Simple Icons (CC0)
-  favicon.svg, apple-touch-icon.png, og-image.jpg
-.nojekyll               Tells GitHub Pages to serve files as-is
+index.html       Home: intro, availability, core stack, featured projects
+about.html       About: journey, quick facts, what I do, experience & education, skills
+projects.html    Selected works (with details panel and Nodaly demo video) and smaller builds
+resume.html      Resume: inline PDF viewer and download
+contact.html     Contact details and message form
+cv.html          Printable CV generated from js/data.js ("Save as PDF")
+css/styles.css   All styles; light/dark colours are CSS variables at the top
+js/data.js       All editable content: profile, projects, small builds, skills
+js/main.js       Rendering, theme toggle, mobile menu, project details, contact form
+assets/          CV PDF, photo, project screenshot, demo video, fonts (Outfit, Geist Mono; SIL OFL), icons
+.nojekyll        Tells GitHub Pages to serve files as-is
 ```
+
+The header and footer are repeated in each HTML page, so a change to the menu or footer
+needs to be made in all five pages.
 
 ## Editing content
 

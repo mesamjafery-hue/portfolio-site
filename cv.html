@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meesam Abbas — CV</title>
+    <meta name="description" content="CV of Meesam Abbas, Frontend / MERN Stack Developer." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <style>
+      @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Variable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+      @page { size: A4; margin: 14mm 15mm; }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: "Geist", system-ui, sans-serif; color: #0d1529; background: #eef1f8; font-size: 10.5pt; line-height: 1.45; -webkit-font-smoothing: antialiased; }
+      .page { max-width: 210mm; margin: 24px auto; padding: 16mm 17mm; background: #fff; box-shadow: 0 10px 40px -20px rgba(13,21,41,.3); }
+      .toolbar { max-width: 210mm; margin: 24px auto 0; display: flex; justify-content: space-between; align-items: center; font-size: 14px; padding-inline: 4px; }
+      .toolbar a, .toolbar button { font: inherit; color: #3a50d9; background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 0; }
+      .toolbar button { color: #fff; background: #3a50d9; text-decoration: none; padding: 8px 16px; border-radius: 999px; font-weight: 600; }
+      h1 { margin: 0; font-size: 24pt; letter-spacing: -0.03em; font-weight: 650; line-height: 1.1; }
+      .role { margin: 2px 0 0; font-size: 12.5pt; color: #3a50d9; font-weight: 550; }
+      .contact { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 4px 16px; color: #4f5c75; font-size: 9.5pt; padding: 0; list-style: none; }
+      .contact a { color: inherit; text-decoration: none; }
+      h2 { margin: 18px 0 8px; padding-bottom: 4px; font-size: 11pt; letter-spacing: -0.005em; font-weight: 650; border-bottom: 1px solid #dde3ef; color: #0d1529; }
+      p { margin: 0; }
+      .summary { margin-top: 14px; color: #263048; }
+      .item { margin-bottom: 10px; break-inside: avoid; }
+      .item-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+      .item h3 { margin: 0; font-size: 10.5pt; font-weight: 650; }
+      .item .meta { color: #4f5c75; font-size: 9.5pt; }
+      .item p { color: #263048; }
+      ul.b { margin: 4px 0 0; padding-left: 15px; }
+      ul.b li { margin: 1px 0; color: #263048; }
+      .tech { color: #4f5c75; font-size: 9pt; margin-top: 2px; }
+      .skills { display: grid; grid-template-columns: 82px 1fr; gap: 3px 10px; }
+      .skills dt { font-weight: 600; }
+      .skills dd { margin: 0; color: #263048; }
+      @media print {
+        body { background: #fff; }
+        .toolbar { display: none; }
+        .page { margin: 0; padding: 0; box-shadow: none; max-width: none; }
+      }
+      @media (max-width: 640px) { .page { margin: 12px; padding: 22px; } .toolbar { margin: 12px; } .item-head { flex-direction: column; gap: 0; } }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="resume.html">Back to portfolio</a>
+      <button type="button" onclick="window.print()">Save as PDF</button>
+    </div>
+    <main class="page" id="cv"></main>
+
+    <script src="js/data.js"></script>
+    <script>
+      (function () {
+        var D = window.PORTFOLIO, p = D.profile;
+        function e(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+        var html = "";
+        html += "<header><h1>" + e(p.name) + "</h1><p class='role'>" + e(p.role) + "</p>" +
+          "<ul class='contact'><li>" + e(p.location) + "</li>" +
+          "<li><a href='mailto:" + e(p.email) + "'>" + e(p.email) + "</a></li>" +
+          "<li><a href='" + e(p.linkedin) + "'>linkedin.com/in/syed-meesam-abbas-a200b33a5</a></li>" +
+          "<li><a href='" + e(p.github) + "'>github.com/mesamjafery-hue</a></li>" +
+          "<li><a href='" + e(p.site) + "'>mesamjafery-hue.github.io/portfolio-site</a></li></ul></header>";
+        html += "<p class='summary'>Software Engineering graduate and MERN Stack Developer building responsive, maintainable web applications with React, Node.js, Express and MongoDB, plus PostgreSQL for relational data. Experienced with REST API design, authentication and Stripe payment integration.</p>";
+
+        html += "<h2>Experience</h2><div class='item'><div class='item-head'><h3>MERN Stack Intern</h3><span class='meta'>U Devs SMC Pvt Ltd</span></div>" +
+          "<ul class='b'><li>Developed and improved features in web applications built with modern JavaScript tooling.</li>" +
+          "<li>Worked with front-end components and connected them to APIs.</li>" +
+          "<li>Collaborated with the team through Git-based development workflows.</li></ul></div>";
+
+        html += "<h2>Projects</h2>";
+        D.projects.forEach(function (pr) {
+          html += "<div class='item'><div class='item-head'><h3>" + e(pr.title) + " — " + e(pr.subtitle) + "</h3><span class='meta'>" + e(pr.kind) + "</span></div>" +
+            "<p>" + e(pr.summary) + "</p>" +
+            (pr.tech.length ? "<p class='tech'>" + e(pr.tech.join(", ")) + "</p>" : "") + "</div>";
+        });
+
+        html += "<h2>Technical skills</h2><dl class='skills'>";
+        D.skills.forEach(function (g) { html += "<dt>" + e(g.group) + "</dt><dd>" + e(g.items.join(", ")) + "</dd>"; });
+        html += "</dl>";
+
+        html += "<h2>Education</h2><div class='item'><div class='item-head'><h3>BS Software Engineering</h3><span class='meta'>Completed</span></div>" +
+          "<p>University of Management and Technology (UMT), Lahore</p>" +
+          "<p class='tech'>Final year project: MedCare — doctor consultations, AI-assisted prescription verification, medicine ordering and delivery tracking.</p></div>";
+
+        document.getElementById("cv").innerHTML = html;
+      })();
+    </script>
+  </body>
+</html>

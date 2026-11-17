@@ -22,7 +22,7 @@
     if (themeBtn) themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
     if (save) { try { localStorage.setItem("theme", t); } catch (e) {} }
   }
-  setTheme(root.getAttribute("data-theme") || "dark", false);
+  setTheme(root.getAttribute("data-theme") || "light", false);
   if (themeBtn) {
     themeBtn.addEventListener("click", function () {
       setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
@@ -139,12 +139,24 @@
     },
   };
 
+  // Every cover sits in a small browser-window frame: a real screenshot when one exists,
+  // otherwise a schematic of the project's structure.
   function coverHTML(p) {
+    var label = esc(p.coverLabel || p.title);
+    var body;
     if (p.image) {
-      return '<div class="card-cover has-image"><img src="' + esc(p.image) + '" alt="Screenshot of ' + esc(p.title) + '" loading="lazy" decoding="async"></div>';
+      body = '<img src="' + esc(p.image) + '" alt="Screenshot of ' + esc(p.title) + '" decoding="async">';
+    } else {
+      var fn = covers[p.cover];
+      body = fn ? fn(p) : "";
     }
-    var fn = covers[p.cover];
-    return '<div class="card-cover" aria-hidden="true">' + (fn ? fn(p) : "") + "</div>";
+    var play = p.video
+      ? '<button class="play-overlay" type="button" data-open-project="' + esc(p.id) + '" data-play-video aria-label="Play the ' + esc(p.title) + ' demo video">' +
+        '<span class="play-disc">' + icon("play") + '</span><span class="play-text">Watch demo</span></button>'
+      : "";
+    return '<div class="card-cover' + (p.image ? " has-image" : "") + '"' + (p.image || p.video ? "" : ' aria-hidden="true"') + ">" +
+      '<div class="frame"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i><span>' + label + "</span></div>" +
+      '<div class="frame-body">' + body + "</div></div>" + play + "</div>";
   }
 
   function badges(list) {
@@ -162,7 +174,8 @@
   /* ---------- Projects ---------- */
   var grid = $("[data-projects]");
   if (grid && DATA.projects.length) {
-    grid.innerHTML = DATA.projects.map(function (p) {
+    var shown = grid.hasAttribute("data-featured-only") ? DATA.projects.filter(function (p) { return p.featured; }) : DATA.projects;
+    grid.innerHTML = shown.map(function (p) {
       var feats = p.features.slice(0, 3).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("");
       return (
         '<article class="project-card' + (p.featured ? " is-featured" : "") + '" id="project-' + esc(p.id) + '">' +
@@ -314,6 +327,16 @@
     });
   }
 
+  // Deep link: projects.html#project-medcare opens that project's details.
+  function openFromHash() {
+    var deep = location.hash.match(/^#project-([\w-]+)$/);
+    if (deep && document.getElementById("project-" + deep[1]) && !(dialog && dialog.open)) {
+      setTimeout(function () { openProject(deep[1], document.querySelector('[data-open-project="' + deep[1] + '"]')); }, 250);
+    }
+  }
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
+
   /* ---------- Contact form ----------
      Sends through FormSubmit (https://formsubmit.co), a free form-to-email
      service that works on static hosts. The first message triggers a one-time
@@ -401,6 +424,31 @@
           submit.textContent = "Send message";
         });
     });
+  }
+
+  /* ---------- Scroll reveal (subtle, once) ---------- */
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !reduce) {
+    var targets = $$(".section-head, .section > .section-title, .stack-strip, .capability, .project-card, .small-item, .timeline-item, .edu-card, .skill-group, .about-photo, .about-copy, .contact-copy, .contact-form, .viewer-frame");
+    root.classList.add("reveal-ready");
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("is-in"); ro.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    targets.forEach(function (el) {
+      var sibs = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.style.setProperty("--ri", Math.min(sibs, 4));
+      el.classList.add("reveal");
+      ro.observe(el);
+    });
+  }
+
+  /* ---------- Back to top ---------- */
+  var toTop = $("[data-to-top]");
+  if (toTop) {
+    var onTop = function () { toTop.classList.toggle("show", window.scrollY > 700); };
+    window.addEventListener("scroll", onTop, { passive: true }); onTop();
   }
 
   /* ---------- CV link + year ---------- */

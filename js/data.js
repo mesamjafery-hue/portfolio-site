@@ -68,6 +68,7 @@ window.PORTFOLIO = {
       kind: "Full-stack app",
       featured: true,
       cover: "flow",
+      coverLabel: "Nodaly: dashboard",
       flow: ["React UI", "Express API", "Stripe", "MongoDB"],
       summary:
         "A workspace for therapists and clinical supervisors: client records, intake requests, session notes, treatment plans, standardised assessments, risk tracking and supervision hours, with Stripe subscriptions and admin approval of new accounts.",
