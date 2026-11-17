@@ -37,7 +37,7 @@ Everything recruiters read about projects lives in `js/data.js`.
 - **Add a demo video:** put an MP4 in `assets/video/` and set
   `video: { src, poster, caption }` on the project. A "Watch demo" button appears
   on the card and the player opens in the details panel. (Nodaly already has one.)
-- **Replace the resume:** overwrite `assets/Meesam-Abbas-CV.pdf` with your new PDF
+- **Replace the resume:** overwrite `assets/Meesam-Abbas-Resume.pdf` with your new PDF
   (keep the file name, or change `profile.cv` in `data.js`).
 
 ## Contact form

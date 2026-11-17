@@ -19,7 +19,7 @@ window.PORTFOLIO = {
     linkedin: "https://www.linkedin.com/in/syed-meesam-abbas-a200b33a5/",
     site: "https://mesamjafery-hue.github.io/portfolio-site/",
     // Path to the downloadable CV. Replace the file with your own PDF any time.
-    cv: "assets/Meesam-Abbas-CV.pdf",
+    cv: "assets/Meesam-Abbas-Resume.pdf",
   },
 
   // Shown as the "Core stack" logo row under the hero.

@@ -898,3 +898,18 @@ a.contact-link:hover { background: var(--surface); border-color: var(--line); }
 .cert-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) { .cert-grid { grid-template-columns: 1fr; } }
+
+/* Resume viewer: large rounded embed like a document reader */
+.resume-viewer { padding-bottom: var(--space-section); }
+.viewer {
+  max-width: 1100px;
+  margin-inline: auto;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #323639;
+  box-shadow: 0 30px 70px -30px rgba(18, 19, 22, 0.45);
+}
+.viewer .pdf-object { display: block; width: 100%; height: clamp(640px, 86vh, 1000px); background: #323639; border: 0; }
+.viewer .pdf-fallback { display: grid; gap: 1rem; justify-items: center; padding: 1.25rem; background: var(--surface-2); }
+.viewer .pdf-fallback img { width: 100%; max-width: 760px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+@media (max-width: 680px) { .viewer { border-radius: 20px; } }
